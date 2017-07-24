@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Udacity Pokédex</title>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+	<link rel="stylesheet" href="/static/main.min.css">
+
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+	<script src="//apis.google.com/js/platform.js?onload=start">
+	</script>
+</head>
+
+<body>
+	<script>
+		function signInCallback(authResult) {
+			if (authResult['code']) {
+				// Hide the sign-in button now that the user is authorized
+				$('#signinButton').attr('style', 'display: none');
+
+				// Send the one-time-use code to the server, if the server responds, write a 'login successful' message to the web page and then redirect back to the main restaurants page
+				$.ajax({
+					type: 'POST',
+					url: '/gconnect?state={{STATE}}',
+					processData: false,
+					data: authResult['code'],
+					contentType: 'application/octet-stream; charset=utf-8',
+					success: function(result) {
+						// Handle or verify the server response if necessary.
+						if (result) {
+							$('#login').html('Logging in...')
+							window.location.href = "/";
+						} else if (authResult['error']) {
+							console.log('There was an error: ' + authResult['error']);
+						} else {
+							$('#login').html('Failed to make a server-side call. Check your configuration and console.');
+						}
+					}
+				});
+			}
+		}
+	</script>
+
+	<div class="container">
+		<header class="row">
+			<div class="left-head col-4">
+				<a href="/" class="pokedex-orbs">
+					<div class="circle orb-shadow"></div>
+					<div class="circle orb"></div>
+					<div class="circle cr"></div>
+					<div class="circle cy"></div>
+					<div class="circle cg"></div>
+				</a>
+        <div class="extra-height"></div>
+      </div>
+      <div class="right-head col-8">
+				<div class="pokedex-accountInfo">
+					{%if 'username' not in session %}
+					<a href="{{url_for('login')}}">
+						Login
+					</a> {% else %}
+					<a href="{{url_for('logout')}}">
+						Logout
+					</a> {% endif %}
+				</div>
+			</div>
+		</header>
+		<main class="row">
+			<div class="categories col-3 col-s-4">
+					<h1>Types</h1>
+					<ul>
+						{% for type in types %}
+							<a href="{{url_for('listType', pokedex_id = type.name )}}">
+								<li>
+									<span>{{type.name}}</span>
+								</li>
+							</a>
+						{% endfor %}
+					</ul>
+			</div>
+			<div class="{% if pageType == 'homepage' %}latest{% endif %}{% if pageType == 'typepage' %}type-items{% endif %} col-9 col-s-8">
+				<div class="inner-frame">
+				<div class="inner-content">
+					<img class="oak" src="./static/img/ProfessorOak.png"/>
+					<div id="signInButton">
+						<span class="g-signin" data-scope="openid email" data-clientid="187802727087-clh9efqveh5ioid2cgp4vs3tlf1qhajq.apps.googleusercontent.com" data-redirecturi="postmessage" data-accesstype="offline" data-cookiepolicy="single_host_origin" data-callback="signInCallback"
+								data-approvalprompt="force">
+						</span>
+					</div>
+			</div>
+		</div>
+	</div>
+		</main>
+	</div>
+</body>
+
+</html>

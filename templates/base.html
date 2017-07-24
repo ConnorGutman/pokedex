@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<title>Udacity Pokédex</title>
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+		<link rel="stylesheet" href="/static/main.min.css">
+</head>
+
+<body>
+	<div class="container">
+		<header class="row">
+			<div class="left-head col-4">
+				<a href="/" class="pokedex-orbs">
+					<div class="circle orb-shadow"></div>
+					<div class="circle orb"></div>
+					<div class="circle cr"></div>
+					<div class="circle cy"></div>
+					<div class="circle cg"></div>
+				</a>
+        <div class="extra-height"></div>
+      </div>
+      <div class="right-head col-8">
+				<div class="pokedex-accountInfo">
+					{%if 'username' not in session %}
+					<a href="{{url_for('login')}}">
+						Login
+					</a> {% else %}
+					<a href="{{url_for('logout')}}">
+						Logout
+					</a> {% endif %}
+				</div>
+			</div>
+		</header>
+		<main class="row">
+			{% block content %} {% endblock %}
+		</main>
+	</div>
+</body>
+
+</html>

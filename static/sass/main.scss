@@ -1,0 +1,33 @@
+body {
+  margin: 0;
+}
+.inner-content::-webkit-scrollbar, .categories::-webkit-scrollbar {
+  width: 10px;
+}
+.inner-content::-webkit-scrollbar-thumb {
+  background: #3498DB;
+}
+.categories::-webkit-scrollbar-thumb {
+  background: #F25B5C;
+}
+.inner-content::-webkit-scrollbar-track {
+  background: #00aee4;
+}
+.categories::-webkit-scrollbar-track {
+  background: #A62B26;
+}
+//Modules & Variables
+@import "partials/base";
+
+//Partials
+@import "partials/typography";
+@import "partials/media";
+@import "partials/buttons";
+@import "partials/nav";
+@import "partials/sections";
+//Vendor
+@import "vendor/szechuan";
+
+.hidden {
+  display: none;
+}

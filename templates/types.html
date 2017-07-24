@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+		<div class="categories col-3 col-s-4">
+				<h1>Types</h1>
+				<ul>
+					{% for type in types %}
+						<a href="{{url_for('listType', pokedex_id = type.name )}}">
+							<li>
+								<span>{{type.name}}</span>
+							</li>
+						</a>
+					{% endfor %}
+				</ul>
+		</div>
+		<div class="{% if pageType == 'homepage' %}latest{% endif %}{% if pageType == 'typepage' %}type-pokemons{% endif %} col-9 col-s-8">
+			<div class="inner-frame">
+			<div class="inner-content">
+			{% if pageType == 'homepage' %}
+			<h2 class="text-center">Latest Pokemon</h2>
+			<ul>
+				{% for pokemon in pokemons|sort(attribute='id', reverse = True) %}
+					{% if loop.index <= 5 %}
+						<a href="{{url_for('listPokemon', pokedex_id = pokemon.type_id ,pokemon_id = pokemon.id )}}">
+							<li>
+								<span>{{pokemon.name}}</span>
+								<span>({{pokemon.type.name}})</span>
+							</li>
+						</a>
+					{% endif %}
+				{% endfor %}
+			</ul>
+			{% endif %}
+			{% if pageType == 'typepage' %}
+			<h3 class="text-center">{{typeName}} Pokemon ({{pokemonsCount}} Pokemon)</h3>
+			<ul>
+				{% for pokemon in pokemons %}
+				<a href="{{url_for('listPokemon', pokedex_id = pokemon.type_id ,pokemon_id = pokemon.id )}}">
+					<li>
+						<span>{{pokemon.name}}</span>
+					</li>
+				</a>
+				{% endfor %}
+			</ul>
+			{% endif %}
+			{% if 'username' in session %}
+				<a href="{{url_for('addPokemon')}}">Add Pokemon</a>
+			{% endif %}
+		</div>
+	</div>
+</div>
+{% endblock %}

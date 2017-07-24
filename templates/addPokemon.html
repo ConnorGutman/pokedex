@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="categories col-3 col-s-4">
+		<h1>Types</h1>
+		<ul>
+			{% for type in types %}
+				<a href="{{url_for('listType', pokedex_id = type.name )}}">
+					<li>
+						<span>{{type.name}}</span>
+					</li>
+				</a>
+			{% endfor %}
+		</ul>
+</div>
+		<div class="col-9 col-s-8">
+			<div class="inner-frame">
+			<div class="inner-content">
+			<h2 class="text-center">New Pokemon</h2>
+			<form action="" method="post" enctype="multipart/form-data">
+					<input type="text" name="name" placeholder="Pokemon Name">
+					<textarea name="bio" placeholder="Brief bio."></textarea>
+					<select name="type">
+						{% for type in types %}
+							<option value="{{type.name}}">{{type.name}}</option>
+						{% endfor %}
+					</select>
+					<div class="sprite-upload-wrapper">
+					<label>Sprite:</label>
+					<input type="file" name="sprite" accept="image/*">
+					</div>
+				<input type="submit" value="add Pokemon">
+				{% with messages = get_flashed_messages() %}
+					{% if messages %}
+						{% for message in messages %}
+							 <p>{{ message }}</p>
+						{% endfor %}
+					{% endif %}
+				{% endwith %}
+			</form>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

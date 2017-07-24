@@ -1,0 +1,82 @@
+.container {
+  height: 90vh;
+  margin-top: 5vh !important;
+  border: 15px solid $border;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  box-sizing: border-box;
+  header {
+    height: 15vh;
+    z-index: 1;
+    .left-head {
+      .pokedex-orbs {
+        margin: 0;
+        height: calc(15vh - 15px);
+        background-color: $dark;
+      }
+      .extra-height {
+        height: 10vh;
+        background-color: $dark;
+        border-bottom: 15px solid $border;
+        border-right: 15px solid $border;
+      }
+    }
+    .right-head {
+      height: 15vh;
+      background-color: $dark;
+      border-bottom: 15px solid $border;
+    }
+  }
+  main {
+    height: 75vh;
+    .col-9 {
+      padding: 15% 7%;
+      background-color: $darker;
+      .inner-frame {
+        background-color: $term-frame;
+        padding: 5vh 1vh;
+        border-radius: 0 0 0 50px;
+        box-shadow: 0 0 0 10px $border;
+        .inner-content {
+          box-sizing: border-box;
+          height: 48vh;
+          padding: 5%;
+          background-color: $term-blue;
+          border: 1vh solid $border;
+          border-radius: 10px;
+          overflow-y: auto;
+          .sprite-box {
+            color: $term;
+            color: $border !important;
+            background-color: #fff;
+            border: 5px solid $border;
+            border-radius: 5px;
+            padding: 5px;
+            text-decoration: none;
+            display: inline-block;
+            box-sizing: border-box;
+            width: 100%;
+            margin: 2vh 0;
+            img {
+              width: 50%;
+              margin-left: 25%;
+            }
+          }
+        }
+      }
+      @media(min-width: 576px) {
+        padding: 5% 15%;
+        .inner-frame {
+          padding: 5vh;
+          .inner-content {
+            border: 5vh solid $border;
+          }
+        }
+      }
+    }
+  }
+  .categories {
+    padding-top: 10vh;
+    background-color: $darker;
+    border-right: 15px solid $border;
+  }
+}

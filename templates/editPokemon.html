@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="categories col-3 col-s-4">
+		<h1>Types</h1>
+		<ul>
+			{% for type in types %}
+				<a href="{{url_for('listType', pokedex_id = type.name )}}">
+					<li>
+						<span>{{type.name}}</span>
+					</li>
+				</a>
+			{% endfor %}
+		</ul>
+</div>
+		<div class="col-9 col-s-8">
+			<div class="inner-frame">
+			<div class="inner-content">
+			<h1 class="text-center">Edit Pokemon</h1>
+			<form action="#" method="post" enctype="multipart/form-data">
+					<label>Name:</label>
+					<input type="text" name="name" value="{{pokemon.name}}">
+					<label>Bio:</label>
+					<textarea name="bio">{{pokemon.bio}}</textarea>
+					<label>Type:</label>
+					<select name="type">
+						{% for type in types %}
+							{% if pokemon.type_id == type.name %}
+								<option selected value="{{type.name}}">{{type.name}}</option>
+							{% else %}
+								<option value="{{type.name}}">{{type.name}}</option>
+							{% endif %}
+						{% endfor %}
+					</select>
+				<div class="sprite-upload-wrapper">
+				<label>Sprite:</label>
+				<input type="file" name="sprite" accept="image/*">
+			</div>
+				<a class="cancelEdit" href="{{url_for('listPokemon', pokedex_id = pokemon.type_id ,pokemon_id = pokemon.id )}}">Cancel</a>
+				<input type="submit" value="Save">
+			</form>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

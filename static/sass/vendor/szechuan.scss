@@ -1,0 +1,107 @@
+// Customize class names, grid options, and what's included:
+$grid-pieces: "container" "row" "col" !default;
+$align: "left" "center" "right" !default;
+$push-class: "push" !default;
+$pull-class: "pull" !default;
+$fluid-class: "fluid" !default;
+$hide-phrase: "hidden" !default;
+$container-width: 80% !default;
+$container-max-width: 80% !default;
+$container-margin: 0 auto !default;
+$gutter-width: 0px !default;
+$gutter-height: 0px !default;
+$breakpoints: ( s: (576px), m: (768px), l: (992px), xl: (1200px) ) !default;
+$pushes: true !default;
+$pulls: true !default;
+$breaks: true !default;
+$aligns: true !default;
+.#{nth($grid-pieces, 1)}, .#{nth($grid-pieces, 1)}-#{$fluid-class}  {
+	display: flex;
+	flex-direction: column;
+	margin: $container-margin;
+	width: 100%;
+	max-width: 100%;
+}
+.#{nth($grid-pieces, 1)} {
+	width: 95%;
+  max-width: 95%;
+}
+.#{nth($grid-pieces, 2)} {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  flex-wrap: wrap;
+}
+@if ($aligns) {
+  .#{nth($align, 1)}, .#{nth($align, 2)} {
+    margin-right: auto;
+  }
+  .#{nth($align, 3)}, .#{nth($align, 2)} {
+    margin-left: auto;
+  }
+}
+.#{$fluid-class} {
+  flex: 1;
+}
+@for $i from 1 through 12 {
+  .#{nth($grid-pieces, 3)}-#{$i} {
+    width: calc(#{percentage($i/12)} - #{$gutter-width});
+		box-sizing: border-box;
+	  margin: $gutter-height / 2 $gutter-width / 2;
+	  vertical-align: top;
+  }
+  @if ($pushes) {
+    .#{$push-class}-#{$i} {
+      margin-left: calc(#{percentage($i/12)} + #{$gutter-width} / 2);
+    }
+  }
+  @if ($pulls) {
+    .#{$pull-class}-#{$i} {
+      margin-left: calc(-#{percentage($i/12)} + #{$gutter-width} / 2);
+    }
+  }
+}
+@if ($breaks) {
+  @each $break in $breakpoints {
+    $break-name: nth($break, 1);
+    $break-width: nth($break, 2);
+		@media (min-width: $break-width) {
+			.#{nth($grid-pieces, 1)} {
+				width: $container-width;
+			  max-width: $container-max-width;
+			}
+		}
+		@media (min-width: $break-width) {
+			.#{$hide-phrase}-#{$break-name}-up {
+				display: none;
+			}
+		}
+    @media (max-width: $break-width) {
+      .#{$hide-phrase}-#{$break-name}-down {
+        display: none;
+      }
+      .#{$fluid-class}-#{$break-name} {
+        flex: 1;
+      }
+      @for $i from 1 through 12 {
+        .#{nth($grid-pieces, 3)}-#{$break-name}-#{$i} {
+          width: calc(#{percentage($i/12)} - #{$gutter-width});
+					box-sizing: border-box;
+				  margin: $gutter-height / 2 $gutter-width / 2;
+				  vertical-align: top;
+        }
+        @if ($pushes) {
+          .#{$push-class}-#{$break-name}-#{$i} {
+            margin-left: calc(#{percentage($i/12)} + #{$gutter-width} / 2);
+          }
+        }
+        @if ($pulls) {
+          .#{$pull-class}-#{$break-name}-#{$i} {
+            margin-left: calc(-#{percentage($i/12)} + #{$gutter-width} / 2);
+          }
+        }
+      }
+    }
+  }
+}
+//100 lines!

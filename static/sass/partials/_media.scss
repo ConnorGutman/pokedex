@@ -1,0 +1,56 @@
+.circle {
+  height: 0;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+}
+.oak {
+  width: 50%;
+  margin-left: 25%;
+}
+.orb,
+.orb-shadow {
+  position: absolute;
+}
+.orb-shadow {
+  width: 8vh;
+  padding-bottom: 8vh;
+  margin: 2vh 0 0 2%;
+  background: #CDE3F7;
+}
+.orb {
+  width: 6vh;
+  padding-bottom: 6vh;
+  margin: 3vh 0 0 2.5%;
+  background: #3498DB;
+}
+.cr,
+.cy,
+.cg {
+  position: absolute;
+  margin-top: 2vh;
+  width: 2vh;
+  padding-bottom: 2vh;
+  border: 5px solid #2F282B;
+}
+.cr {
+  margin-left: 18%;
+  background: $darker;
+  @media(min-width: 576px) {
+    margin-left: 8%;
+  }
+}
+.cy {
+  margin-left: 25%;
+  background: $yellowish;
+  @media(min-width: 576px) {
+    margin-left: 11%;
+  }
+}
+.cg {
+  margin-left: 32%;
+  background: $greenish;
+  @media(min-width: 576px) {
+    margin-left: 14%;
+  }
+}

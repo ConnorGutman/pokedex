@@ -1,0 +1,33 @@
+{% extends "base.html" %} {% block content %}
+<div class="categories col-3 col-s-4">
+		<h1>Types</h1>
+		<ul>
+			{% for type in types %}
+				<a href="{{url_for('listType', pokedex_id = type.name )}}">
+					<li>
+						<span>{{type.name}}</span>
+					</li>
+				</a>
+			{% endfor %}
+		</ul>
+</div>
+<div class="category-pokemon col-9 col-s-8">
+	<div class="inner-frame">
+	<div class="inner-content">
+	<h2 class="text-center">{{pokemon.name}}</h2>
+	<div class="sprite-box">
+		<img src="{{pokemon.sprite}}" />
+		<div class="bio-text">
+			{{pokemon.bio}}
+		</div>
+	</div>
+	<div class="pokemon-settings">
+		<a href="{{url_for('listType', pokedex_id = pokemon.type_id)}}">Back</a> {% if 'username' in session and trainer.id == session['user_id'] %}
+		<a href="{{url_for('editPokemon', pokedex_id = pokemon.type_id, pokemon_id = pokemon.id)}}">Edit</a>
+		<a href="{{url_for('deletePokemon', pokedex_id = pokemon.type_id, pokemon_id = pokemon.id)}}">Delete</a> {% endif %}
+	</div>
+</div>
+</div>
+</div>
+
+{% endblock %}
