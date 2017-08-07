@@ -10,7 +10,7 @@ A fun and basic Pokedex built for the Udacity Item Catalog assignment. Gives a l
 
 ## Running the Pokedex
 
-If this is your first time running the Pokedex, start by populating the database with some demo data:
+If this is your first time running the Pokedex, start by populating the database with some demo pokemon data:
 
 `python demopokemon.py`
 
